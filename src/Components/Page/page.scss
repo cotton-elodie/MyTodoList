@@ -1,0 +1,30 @@
+.page {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  padding: 10px;
+  padding-top: auto;
+  border: 3px solid blue;
+  border-radius: 10px;
+
+  &-modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 0 20px 0;
+
+    h1 {
+        font-weight: bold;
+        font-size: 1.5em;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    button{
+        min-width: 8px;
+        min-height: 8px;
+        height: 51px;
+    }
+  }
+}

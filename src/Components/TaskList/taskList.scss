@@ -1,0 +1,11 @@
+.taskList{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: 'Raleway', sans-serif;
+
+    &-item{
+        padding: 10px;
+    }
+}

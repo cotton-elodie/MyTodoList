@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Delius&family=Grape+Nuts&family=Poppins:ital@0;1&family=Raleway:ital,wght@0,400;0,600;1,100&display=swap");
+
+.taskitem {
+  font-family: "Raleway", sans-serif;
+  size: 1.5em;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+  border: 1px solid rgb(49, 205, 232);
+  border-radius: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+ 
+  background: rgb(49, 205, 232);
+
+  &-complete label.ms-Checkbox-label {
+    font-family: "Raleway", sans-serif;
+    text-decoration: line-through;
+  
+
+
+  }
+  
+  .ms-Checkbox-text{
+    font-family: "Raleway", sans-serif;
+    color: aliceblue;
+
+  }
+}

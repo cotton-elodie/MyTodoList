@@ -6,11 +6,13 @@ import { TextField } from "@fluentui/react/lib/TextField";
 import { PrimaryButton, DefaultButton } from "@fluentui/react/lib/Button";
 import TaskList from "../TaskList/TaskList";
 
+import '../Page/page.scss'
+
+
 const Page = () => {
   const [showModal, setShowModal] = useState(false);
   const [taskList, setTaskList] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [items, setItems] = useState([]);
 
   const onTaskTitleChange = (event, newvalue) => {
     setNewTaskTitle(newvalue);
@@ -18,23 +20,30 @@ const Page = () => {
 
   const onCreateTask = () => {
     const copy = taskList.slice();
-    copy.push({ complete: false, title: newTaskTitle });
+    copy.push({ complete: false, title: newTaskTitle});
     setTaskList(copy);
-
     setShowModal(false);
     setNewTaskTitle("");
+    localStorage.setItem('items',JSON.stringify(copy))
+  };
+
+  const onTaskCompletChange = (index)=>{
+    const copy = taskList.slice();
+    copy[index].complete = !copy[index].complete
+    setTaskList(copy);
+    localStorage.setItem('items',JSON.stringify(copy))
   };
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items')) ;
     if (items) {
-     setItems(items) ;
+      setTaskList(items) ;
     }
   }, []);
 
   return (
-    <div>
-      <div>
+    <div className="page" >
+      <div className="page-modal" >
         <h1>Ma todo liste</h1>
 
         <>
@@ -63,8 +72,8 @@ const Page = () => {
           </Dialog>
         </>
       </div>
-      <div>
-        <TaskList taskListArray={taskList} />
+      <div className="page-taskList" >
+        <TaskList taskListArray={taskList} onTaskCompletChange={onTaskCompletChange}/>
       </div>
     </div>
   );

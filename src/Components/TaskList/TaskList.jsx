@@ -1,28 +1,25 @@
-import  TagItem  from "../TaskItem/TaskItem";
-import React, { useEffect } from "react";
+import TagItem from "../TaskItem/TaskItem";
+import React from "react";
 
-const TaskList = ({ taskListArray }) => {
+import "../TaskList/taskList.scss";
 
-  useEffect(()=>{
-console.log('toto')
-  },[taskListArray])
+const TaskList = ({ taskListArray, onTaskCompletChange }) => {
+  // useEffect(()=>{
+  // },[taskListArray])
 
   return (
     <div className="taskList">
       {taskListArray.map((task, index) => (
-
-          <TagItem
-            key={index}
-            isComplete={task.complete}
-            title={task.title}
-          />
-      )
-      
-      )}
+        <TagItem
+          className="taskList-item"
+          key={index}
+          index={index}
+          isComplete={task.complete}
+          title={task.title}
+          onTaskCompletChange={onTaskCompletChange}
+        />
+      ))}
     </div>
   );
 };
-
 export default TaskList;
-
-// { taskListArray, OnTaskCompletChange }
