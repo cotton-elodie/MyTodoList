@@ -4,9 +4,8 @@
   font-family: "Raleway", sans-serif;
   size: 1.5em;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-wrap:nowrap;
+  justify-content:space-between;
   padding: 10px;
   border: 1px solid rgb(49, 205, 232);
   border-radius: 20px;
@@ -14,6 +13,11 @@
   margin-top: 10px;
  
   background: rgb(49, 205, 232);
+
+  &-button{
+    border: none;
+    background: none;
+  }
 
   &-complete label.ms-Checkbox-label {
     font-family: "Raleway", sans-serif;

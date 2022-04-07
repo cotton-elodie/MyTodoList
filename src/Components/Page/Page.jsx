@@ -6,44 +6,58 @@ import { TextField } from "@fluentui/react/lib/TextField";
 import { PrimaryButton, DefaultButton } from "@fluentui/react/lib/Button";
 import TaskList from "../TaskList/TaskList";
 
-import '../Page/page.scss'
-
+import "../Page/page.scss";
 
 const Page = () => {
   const [showModal, setShowModal] = useState(false);
   const [taskList, setTaskList] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  
 
-  const onTaskTitleChange = (event, newvalue) => {
+  const onDialogTaskTitleChange = (event, newvalue) => {
     setNewTaskTitle(newvalue);
   };
 
   const onCreateTask = () => {
-    const copy = taskList.slice();
-    copy.push({ complete: false, title: newTaskTitle});
-    setTaskList(copy);
+    taskList.push({ complete: false, title: newTaskTitle });
+    setTaskList(taskList);
     setShowModal(false);
     setNewTaskTitle("");
-    localStorage.setItem('items',JSON.stringify(copy))
+    localStorage.setItem("items", JSON.stringify(taskList));
   };
 
-  const onTaskCompletChange = (index)=>{
+  const onTaskCompletChange = (index) => {
     const copy = taskList.slice();
-    copy[index].complete = !copy[index].complete
+    copy[index].complete = !copy[index].complete;
     setTaskList(copy);
-    localStorage.setItem('items',JSON.stringify(copy))
+    localStorage.setItem("items", JSON.stringify(copy));
+  };
+
+  const onTaskTitleChange = (index, newTitle) => {
+    const copy = taskList.slice();
+    copy[index].title = newTitle ;
+    setTaskList(copy);
+    localStorage.setItem("items", JSON.stringify(copy));
+  };
+
+  const handleTaskDelete = (index) => {
+    const copy = taskList.slice();
+    copy.splice(index, 1)
+   setTaskList(copy)
+   localStorage.setItem("items", JSON.stringify(copy));
+
   };
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('items')) ;
+    const items = JSON.parse(localStorage.getItem("items"));
     if (items) {
-      setTaskList(items) ;
+      setTaskList(items);
     }
   }, []);
 
   return (
-    <div className="page" >
-      <div className="page-modal" >
+    <div className="page">
+      <div className="page-modal">
         <h1>Ma todo liste</h1>
 
         <>
@@ -58,9 +72,9 @@ const Page = () => {
           >
             <TextField
               label="Titre de la tâche"
-              onChange={onTaskTitleChange}
+              onChange={onDialogTaskTitleChange}
               require
-              placeholder="Votre tâche" 
+              placeholder="Votre tâche"
             />
             <DialogFooter>
               <PrimaryButton onClick={onCreateTask} text="Valider" />
@@ -72,8 +86,13 @@ const Page = () => {
           </Dialog>
         </>
       </div>
-      <div className="page-taskList" >
-        <TaskList taskListArray={taskList} onTaskCompletChange={onTaskCompletChange}/>
+      <div className="page-taskList">
+        <TaskList
+          taskListArray={taskList}
+          onTaskCompletChange={onTaskCompletChange}
+          handleTaskDelete={handleTaskDelete}
+          onTaskTitleChange={onTaskTitleChange}
+        />
       </div>
     </div>
   );

@@ -3,9 +3,8 @@ import React from "react";
 
 import "../TaskList/taskList.scss";
 
-const TaskList = ({ taskListArray, onTaskCompletChange }) => {
-  // useEffect(()=>{
-  // },[taskListArray])
+const TaskList = ({ taskListArray, onTaskCompletChange,handleTaskDelete }) => {
+  
 
   return (
     <div className="taskList">
@@ -17,6 +16,8 @@ const TaskList = ({ taskListArray, onTaskCompletChange }) => {
           isComplete={task.complete}
           title={task.title}
           onTaskCompletChange={onTaskCompletChange}
+          handleTaskDelete={handleTaskDelete}
+          // onTaskTitleChange={onTaskTitleChange}
         />
       ))}
     </div>
