@@ -7,22 +7,27 @@ import { PrimaryButton, DefaultButton } from "@fluentui/react/lib/Button";
 import TaskList from "../TaskList/TaskList";
 
 import "../Page/page.scss";
+import { DatePicker } from "@fluentui/react";
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
+
+initializeIcons();
 
 const Page = () => {
   const [showModal, setShowModal] = useState(false);
   const [taskList, setTaskList] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  
+  const [newTaskDate, setNewTaskDate]= useState();
 
   const onDialogTaskTitleChange = (event, newvalue) => {
     setNewTaskTitle(newvalue);
   };
 
   const onCreateTask = () => {
-    taskList.push({ complete: false, title: newTaskTitle });
+    taskList.push({ complete: false, title: newTaskTitle, date: newTaskDate });
     setTaskList(taskList);
     setShowModal(false);
     setNewTaskTitle("");
+    setNewTaskDate(null);
     localStorage.setItem("items", JSON.stringify(taskList));
   };
 
@@ -35,17 +40,16 @@ const Page = () => {
 
   const onTaskTitleChange = (index, newTitle) => {
     const copy = taskList.slice();
-    copy[index].title = newTitle ;
+    copy[index].title = newTitle;
     setTaskList(copy);
     localStorage.setItem("items", JSON.stringify(copy));
   };
 
   const handleTaskDelete = (index) => {
     const copy = taskList.slice();
-    copy.splice(index, 1)
-   setTaskList(copy)
-   localStorage.setItem("items", JSON.stringify(copy));
-
+    copy.splice(index, 1);
+    setTaskList(copy);
+    localStorage.setItem("items", JSON.stringify(copy));
   };
 
   useEffect(() => {
@@ -76,6 +80,17 @@ const Page = () => {
               require
               placeholder="Votre tâche"
             />
+            <DatePicker
+              isRequired
+              label="Date d'échéance"
+              placeholder="Selection une date..."
+              ariaLabel="Selection une date"
+              onSelectDate ={(date)=>setNewTaskDate(date)}
+              // className={styles.control}
+              // DatePicker uses English strings by default. For localized apps, you must override this prop.
+              // strings={defaultDatePickerStrings}
+            />
+
             <DialogFooter>
               <PrimaryButton onClick={onCreateTask} text="Valider" />
               <DefaultButton

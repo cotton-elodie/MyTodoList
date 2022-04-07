@@ -15,6 +15,7 @@ const TaskList = ({ taskListArray, onTaskCompletChange,handleTaskDelete }) => {
           index={index}
           isComplete={task.complete}
           title={task.title}
+          date= {task.date}
           onTaskCompletChange={onTaskCompletChange}
           handleTaskDelete={handleTaskDelete}
           // onTaskTitleChange={onTaskTitleChange}

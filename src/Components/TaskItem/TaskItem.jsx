@@ -3,6 +3,7 @@ import { Checkbox } from "@fluentui/react";
 import { ImBin2 } from "react-icons/im";
 
 import "../TaskItem/taskItem.scss";
+import moment from "moment";
 
 const TaskItem = ({
   index,
@@ -10,6 +11,7 @@ const TaskItem = ({
   title,
   onTaskCompletChange,
   handleTaskDelete,
+  date
   // onTaskTitleChange,
 }) => {
   const [taskComplet, setTaskComplet] = useState(isComplete);
@@ -31,6 +33,7 @@ const TaskItem = ({
       <button className="taskitem-button" onClick={() => handleTaskDelete(index)}>
         <ImBin2 />
       </button>
+      <span> {moment(date).format('d/MM/yyyy')} </span>
 
     </div>
   );
